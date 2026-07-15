@@ -1,74 +1,17 @@
-from flask import Flask, render_template, redirect, url_for, session
+from flask import Flask
 import os
-import traceback
-
-from routes.auth_routes import auth_bp
-from routes.user_routes import user_bp
-from routes.staff_routes import staff_bp
-from routes.admin_routes import admin_bp
-
 
 app = Flask(__name__)
-
-app.secret_key = os.environ.get(
-    "SECRET_KEY",
-    "college_mini_project_secret_key_2026"
-)
-
-
-# Register Blueprints
-app.register_blueprint(auth_bp)
-app.register_blueprint(user_bp)
-app.register_blueprint(staff_bp)
-app.register_blueprint(admin_bp)
-
-
-# Temporary health check for Railway
-@app.route("/health")
-def health():
-    return "Dine Desk Server Running Successfully"
 
 
 @app.route("/")
 def home():
-    """
-    Root route.
-    Redirect users based on login status and role.
-    """
-
-    try:
-        if "user_id" in session:
-
-            role = session.get("role")
-
-            if role == "admin":
-                return redirect(url_for("admin.dashboard"))
-
-            elif role == "staff":
-                return redirect(url_for("staff.dashboard"))
-
-            else:
-                return redirect(url_for("user.dashboard"))
-
-        return redirect(url_for("auth.login"))
-
-    except Exception as e:
-        traceback.print_exc()
-        return str(e), 500
+    return "Railway Flask Test Working"
 
 
-
-@app.errorhandler(404)
-def page_not_found(e):
-    return render_template("shared/404.html"), 404
-
-
-
-@app.errorhandler(Exception)
-def handle_exception(e):
-    traceback.print_exc()
-    return str(e), 500
-
+@app.route("/health")
+def health():
+    return "Health OK"
 
 
 if __name__ == "__main__":
@@ -77,6 +20,5 @@ if __name__ == "__main__":
 
     app.run(
         host="0.0.0.0",
-        port=port,
-        debug=False
+        port=port
     )
