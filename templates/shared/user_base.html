@@ -1,0 +1,11 @@
+{% extends "shared/base.html" %}
+{% block sidebar_links %}
+    <a href="{{ url_for('user.dashboard') }}" class="nav-link">🍔 Food Menu</a>
+    <a href="{{ url_for('user.order_food') }}" class="nav-link">🛒 Order Food</a>
+    <a href="{{ url_for('user.view_tables') }}" class="nav-link">🍽️ View Tables</a>
+    <a href="{{ url_for('user.book_table') }}" class="nav-link">📅 Book a Table</a>
+    <a href="{{ url_for('user.parking') }}" class="nav-link">🚗 Pay Parking</a>
+    <a href="{{ url_for('user.my_orders') }}" class="nav-link">📦 My Orders</a>
+    <a href="{{ url_for('user.my_bookings') }}" class="nav-link">📖 My Bookings</a>
+    <a href="{{ url_for('user.profile') }}" class="nav-link">👤 My Profile</a>
+{% endblock %}

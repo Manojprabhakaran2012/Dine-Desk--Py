@@ -1,0 +1,51 @@
+{% extends "shared/admin_base.html" %}
+{% block title %}Manage Staff{% endblock %}
+{% block page_title %}Manage Staff{% endblock %}
+{% block content %}
+    <div class="form-box">
+        <h3>Add New Staff Member</h3>
+        <form method="POST" action="{{ url_for('admin.manage_staff') }}">
+            <div class="form-group">
+                <label for="full_name">Full Name</label>
+                <input type="text" name="full_name" id="full_name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" minlength="6" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="tel" name="phone" id="phone">
+            </div>
+            <button type="submit" class="btn btn-primary">Add Staff</button>
+        </form>
+    </div>
+
+    <h3>All Staff Members</h3>
+    <table class="data-table">
+        <thead>
+            <tr><th>ID</th><th>Name</th><th>Email</th><th>Phone</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+            {% for s in staff_list %}
+            <tr>
+                <td>{{ s.user_id }}</td>
+                <td>{{ s.full_name }}</td>
+                <td>{{ s.email }}</td>
+                <td>{{ s.phone or '-' }}</td>
+                <td>
+                    <a href="{{ url_for('admin.delete_staff', user_id=s.user_id) }}"
+                       class="btn btn-small btn-delete"
+                       onclick="return confirm('Remove this staff member?');">Remove</a>
+                </td>
+            </tr>
+            {% else %}
+            <tr><td colspan="5">No staff members found.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "shared/staff_base.html" %}
+{% block title %}Manage Tables{% endblock %}
+{% block page_title %}Manage Restaurant Tables{% endblock %}
+{% block content %}
+    <table class="data-table">
+        <thead>
+            <tr><th>Table No.</th><th>Capacity</th><th>Status</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+            {% for table in tables %}
+            <tr>
+                <td>{{ table.table_number }}</td>
+                <td>{{ table.capacity }} seats</td>
+                <td>
+                    {% if table.status == 'Available' %}
+                        <span class="badge badge-available">Available</span>
+                    {% else %}
+                        <span class="badge badge-unavailable">Booked</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{{ url_for('staff.toggle_table', table_id=table.table_id) }}" class="btn btn-small btn-toggle">
+                        Mark {{ 'Booked' if table.status == 'Available' else 'Available' }}
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

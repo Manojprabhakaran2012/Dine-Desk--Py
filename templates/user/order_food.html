@@ -1,0 +1,50 @@
+{% extends "shared/user_base.html" %}
+{% block title %}Order Food{% endblock %}
+{% block page_title %}Order Food{% endblock %}
+{% block content %}
+    <form method="POST" action="{{ url_for('user.order_food') }}" id="orderForm">
+
+        <div class="form-group">
+            <label for="table_id">Dine-in Table (optional)</label>
+            <select name="table_id" id="table_id">
+                <option value="">-- Takeaway / No Table --</option>
+                {% for table in tables %}
+                <option value="{{ table.table_id }}">Table {{ table.table_number }} (Seats {{ table.capacity }})</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Food Item</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for food in food_items %}
+                <tr>
+                    <td>
+                        {{ food.name }}
+                        <input type="hidden" name="food_id" value="{{ food.food_id }}">
+                    </td>
+                    <td>₹{{ food.price }}</td>
+                    <td>
+                        <input type="number" name="quantity" min="0" value="0" class="qty-input" data-price="{{ food.price }}">
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="order-total-box">
+            <strong>Estimated Total: ₹<span id="orderTotal">0.00</span></strong>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Place Order</button>
+    </form>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/user.js') }}"></script>
+{% endblock %}

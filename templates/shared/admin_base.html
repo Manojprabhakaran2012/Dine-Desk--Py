@@ -1,0 +1,10 @@
+{% extends "shared/base.html" %}
+{% block sidebar_links %}
+    <a href="{{ url_for('admin.dashboard') }}" class="nav-link">📊 Dashboard</a>
+    <a href="{{ url_for('admin.order_history') }}" class="nav-link">📦 Order History</a>
+    <a href="{{ url_for('admin.booking_history') }}" class="nav-link">📖 Booking History</a>
+    <a href="{{ url_for('admin.parking_history') }}" class="nav-link">🚗 Parking History</a>
+    <a href="{{ url_for('admin.manage_users') }}" class="nav-link">👥 Manage Users</a>
+    <a href="{{ url_for('admin.manage_staff') }}" class="nav-link">🧑‍🍳 Manage Staff</a>
+    <a href="{{ url_for('admin.reports') }}" class="nav-link">📈 Reports</a>
+{% endblock %}

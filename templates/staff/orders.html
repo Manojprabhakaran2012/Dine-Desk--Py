@@ -1,0 +1,32 @@
+{% extends "shared/staff_base.html" %}
+{% block title %}Customer Orders{% endblock %}
+{% block page_title %}Customer Orders{% endblock %}
+{% block content %}
+    {% for order in orders %}
+    <div class="card order-card">
+        <div class="order-card-header">
+            <strong>Order #{{ order.order_id }} — {{ order.customer_name }}</strong>
+            <span class="badge badge-status-{{ order.status|lower }}">{{ order.status }}</span>
+        </div>
+        <p>Date: {{ order.order_date }}</p>
+        <ul class="order-items-list">
+            {% for item in order.items %}
+            <li>{{ item.name }} x {{ item.quantity }} — ₹{{ item.price }}</li>
+            {% endfor %}
+        </ul>
+        <p><strong>Total: ₹{{ order.total_amount }}</strong></p>
+
+        <form method="POST" action="{{ url_for('staff.update_order_status', order_id=order.order_id) }}" class="inline-form">
+            <select name="status">
+                <option value="Pending" {% if order.status == 'Pending' %}selected{% endif %}>Pending</option>
+                <option value="Preparing" {% if order.status == 'Preparing' %}selected{% endif %}>Preparing</option>
+                <option value="Ready" {% if order.status == 'Ready' %}selected{% endif %}>Ready</option>
+                <option value="Delivered" {% if order.status == 'Delivered' %}selected{% endif %}>Delivered</option>
+            </select>
+            <button type="submit" class="btn btn-small btn-primary">Update Status</button>
+        </form>
+    </div>
+    {% else %}
+    <p>No customer orders yet.</p>
+    {% endfor %}
+{% endblock %}

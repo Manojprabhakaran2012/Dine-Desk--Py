@@ -1,0 +1,51 @@
+/* =====================================================================
+   auth.css
+   Styling for the Login and Register pages (centered card layout).
+   ===================================================================== */
+
+.auth-body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(160deg, var(--color-charcoal) 0%, var(--color-charcoal-light) 45%, var(--color-accent-dark) 130%);
+    padding: 20px;
+}
+
+.auth-card {
+    background: var(--color-surface);
+    width: 100%;
+    max-width: 420px;
+    padding: 36px 32px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-md);
+}
+
+.auth-logo {
+    text-align: center;
+    font-size: 26px;
+    margin-bottom: 4px;
+}
+
+.auth-subtitle {
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.auth-footer {
+    text-align: center;
+    margin-top: 16px;
+    font-size: 14px;
+    color: var(--color-text-muted);
+}
+
+.auth-note {
+    text-align: center;
+    margin-top: 14px;
+    font-size: 12px;
+    color: var(--color-text-muted);
+    border-top: 1px dashed var(--color-border);
+    padding-top: 12px;
+}

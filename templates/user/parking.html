@@ -1,0 +1,15 @@
+{% extends "shared/user_base.html" %}
+{% block title %}Parking Fees{% endblock %}
+{% block page_title %}Pay Parking Fees{% endblock %}
+{% block content %}
+    <form method="POST" action="{{ url_for('user.parking') }}" class="form-box">
+        <div class="form-group">
+            <label for="vehicle_type">Vehicle Type</label>
+            <select name="vehicle_type" id="vehicle_type" required>
+                <option value="Bike">Bike (₹{{ rates['Bike'] }})</option>
+                <option value="Car">Car (₹{{ rates['Car'] }})</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Pay Now</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,8 @@
+{% extends "shared/base.html" %}
+{% block sidebar_links %}
+    <a href="{{ url_for('staff.dashboard') }}" class="nav-link">📊 Dashboard</a>
+    <a href="{{ url_for('staff.manage_food') }}" class="nav-link">🍔 Manage Food</a>
+    <a href="{{ url_for('staff.manage_tables') }}" class="nav-link">🍽️ Manage Tables</a>
+    <a href="{{ url_for('staff.bookings') }}" class="nav-link">📖 Table Bookings</a>
+    <a href="{{ url_for('staff.orders') }}" class="nav-link">📦 Customer Orders</a>
+{% endblock %}

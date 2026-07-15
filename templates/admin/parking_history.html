@@ -1,0 +1,29 @@
+{% extends "shared/admin_base.html" %}
+{% block title %}Parking History{% endblock %}
+{% block page_title %}Parking Payment History{% endblock %}
+{% block content %}
+    <div class="form-group" style="max-width:300px;">
+        <input type="text" id="adminSearch" placeholder="Search...">
+    </div>
+    <table class="data-table">
+        <thead>
+            <tr><th>Payment ID</th><th>Customer</th><th>Vehicle</th><th>Amount</th><th>Date</th></tr>
+        </thead>
+        <tbody>
+            {% for p in payments %}
+            <tr>
+                <td>#{{ p.payment_id }}</td>
+                <td>{{ p.customer_name }}</td>
+                <td>{{ p.vehicle_type }}</td>
+                <td>₹{{ p.amount }}</td>
+                <td>{{ p.payment_date }}</td>
+            </tr>
+            {% else %}
+            <tr><td colspan="5">No parking payments found.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+{% endblock %}

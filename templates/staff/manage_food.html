@@ -1,0 +1,63 @@
+{% extends "shared/staff_base.html" %}
+{% block title %}Manage Food{% endblock %}
+{% block page_title %}Manage Food Items{% endblock %}
+{% block content %}
+    <div class="form-box">
+        <h3>Add New Food Item</h3>
+        <form method="POST" action="{{ url_for('staff.manage_food') }}">
+            <div class="form-group">
+                <label for="name">Food Name</label>
+                <input type="text" name="name" id="name" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea name="description" id="description" rows="2"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="price">Price (₹)</label>
+                <input type="number" name="price" id="price" step="0.01" min="0" required>
+            </div>
+            <div class="form-group">
+                <label for="category">Category</label>
+                <input type="text" name="category" id="category" placeholder="e.g. Starters, Main Course">
+            </div>
+            <button type="submit" class="btn btn-primary">Add Food Item</button>
+        </form>
+    </div>
+
+    <h3>All Food Items</h3>
+    <div class="form-group" style="max-width:300px;">
+        <input type="text" id="foodSearch" placeholder="Search food items...">
+    </div>
+    <table class="data-table">
+        <thead>
+            <tr><th>Name</th><th>Price</th><th>Category</th><th>Status</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+            {% for food in food_items %}
+            <tr>
+                <td>{{ food.name }}</td>
+                <td>₹{{ food.price }}</td>
+                <td>{{ food.category }}</td>
+                <td>
+                    {% if food.availability == 'Available' %}
+                        <span class="badge badge-available">Available</span>
+                    {% else %}
+                        <span class="badge badge-unavailable">Unavailable</span>
+                    {% endif %}
+                </td>
+                <td class="action-buttons">
+                    <a href="{{ url_for('staff.edit_food', food_id=food.food_id) }}" class="btn btn-small btn-edit">Edit</a>
+                    <a href="{{ url_for('staff.toggle_food', food_id=food.food_id) }}" class="btn btn-small btn-toggle">Toggle</a>
+                    <a href="{{ url_for('staff.delete_food', food_id=food.food_id) }}"
+                       class="btn btn-small btn-delete"
+                       onclick="return confirm('Delete this food item?');">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/staff.js') }}"></script>
+{% endblock %}

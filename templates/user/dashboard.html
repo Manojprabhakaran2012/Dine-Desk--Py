@@ -1,0 +1,24 @@
+{% extends "shared/user_base.html" %}
+{% block title %}Food Menu{% endblock %}
+{% block page_title %}Available Food Items{% endblock %}
+{% block content %}
+    <div class="card-grid">
+        {% for food in food_items %}
+        <div class="card food-card">
+            <div class="food-card-header">
+                <h3>{{ food.name }}</h3>
+                <span class="badge badge-available">{{ food.category }}</span>
+            </div>
+            <p class="food-desc">{{ food.description }}</p>
+            <p class="food-price">₹{{ food.price }}</p>
+        </div>
+        {% else %}
+        <p>No food items available right now.</p>
+        {% endfor %}
+    </div>
+
+    <div class="cta-box">
+        <p>Ready to order?</p>
+        <a href="{{ url_for('user.order_food') }}" class="btn btn-primary">Order Food Now</a>
+    </div>
+{% endblock %}

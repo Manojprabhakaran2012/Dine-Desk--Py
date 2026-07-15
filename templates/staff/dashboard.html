@@ -1,0 +1,30 @@
+{% extends "shared/staff_base.html" %}
+{% block title %}Staff Dashboard{% endblock %}
+{% block page_title %}Staff Dashboard{% endblock %}
+{% block content %}
+    <div class="card-grid stats-grid">
+        <div class="card stat-card">
+            <h3>{{ stats.total_food }}</h3>
+            <p>Total Food Items</p>
+        </div>
+        <div class="card stat-card">
+            <h3>{{ stats.pending_orders }}</h3>
+            <p>Orders In Progress</p>
+        </div>
+        <div class="card stat-card">
+            <h3>{{ stats.pending_bookings }}</h3>
+            <p>Pending Bookings</p>
+        </div>
+        <div class="card stat-card">
+            <h3>{{ stats.available_tables }}</h3>
+            <p>Available Tables</p>
+        </div>
+    </div>
+
+    <div class="quick-links">
+        <a href="{{ url_for('staff.manage_food') }}" class="btn btn-primary">Manage Food</a>
+        <a href="{{ url_for('staff.manage_tables') }}" class="btn btn-primary">Manage Tables</a>
+        <a href="{{ url_for('staff.bookings') }}" class="btn btn-primary">View Bookings</a>
+        <a href="{{ url_for('staff.orders') }}" class="btn btn-primary">View Orders</a>
+    </div>
+{% endblock %}

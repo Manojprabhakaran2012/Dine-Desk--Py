@@ -1,0 +1,26 @@
+{% extends "shared/user_base.html" %}
+{% block title %}View Tables{% endblock %}
+{% block page_title %}Restaurant Tables{% endblock %}
+{% block content %}
+    <table class="data-table">
+        <thead>
+            <tr><th>Table No.</th><th>Capacity</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+            {% for table in tables %}
+            <tr>
+                <td>{{ table.table_number }}</td>
+                <td>{{ table.capacity }} seats</td>
+                <td>
+                    {% if table.status == 'Available' %}
+                        <span class="badge badge-available">Available</span>
+                    {% else %}
+                        <span class="badge badge-unavailable">Booked</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ url_for('user.book_table') }}" class="btn btn-primary" style="margin-top:15px;">Book a Table</a>
+{% endblock %}

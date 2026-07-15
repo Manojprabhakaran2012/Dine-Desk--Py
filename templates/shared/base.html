@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Restaurant Management System{% endblock %}</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tables.css') }}">
+</head>
+<body>
+
+    <div class="app-container">
+
+        <!-- ============ SIDEBAR ============ -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-logo">🍽️ RMS</div>
+            <nav class="sidebar-nav">
+                {% block sidebar_links %}{% endblock %}
+            </nav>
+        </aside>
+
+        <!-- ============ MAIN AREA ============ -->
+        <div class="main-area">
+
+            <!-- ============ TOP NAVBAR ============ -->
+            <header class="topbar">
+                <button id="sidebarToggle" class="sidebar-toggle-btn">&#9776;</button>
+                <h2 class="page-title">{% block page_title %}Dashboard{% endblock %}</h2>
+                <div class="topbar-right">
+                    <span class="topbar-user">👤 {{ session.get('full_name', '') }}
+                        <span class="role-badge role-{{ session.get('role') }}">{{ session.get('role') }}</span>
+                    </span>
+                    <a href="{{ url_for('auth.logout') }}" class="btn btn-logout">Logout</a>
+                </div>
+            </header>
+
+            <!-- ============ FLASH MESSAGES ============ -->
+            <div class="flash-container">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="flash-message flash-{{ category }}">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+
+            <!-- ============ PAGE CONTENT ============ -->
+            <main class="page-content">
+                {% block content %}{% endblock %}
+            </main>
+
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

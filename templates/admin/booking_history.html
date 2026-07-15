@@ -1,0 +1,30 @@
+{% extends "shared/admin_base.html" %}
+{% block title %}Booking History{% endblock %}
+{% block page_title %}Table Booking History{% endblock %}
+{% block content %}
+    <div class="form-group" style="max-width:300px;">
+        <input type="text" id="adminSearch" placeholder="Search...">
+    </div>
+    <table class="data-table">
+        <thead>
+            <tr><th>Booking ID</th><th>Customer</th><th>Table</th><th>Date</th><th>Time</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+            {% for b in bookings %}
+            <tr>
+                <td>#{{ b.booking_id }}</td>
+                <td>{{ b.customer_name }}</td>
+                <td>{{ b.table_number }}</td>
+                <td>{{ b.booking_date }}</td>
+                <td>{{ b.booking_time }}</td>
+                <td><span class="badge badge-status-{{ b.status|lower }}">{{ b.status }}</span></td>
+            </tr>
+            {% else %}
+            <tr><td colspan="6">No bookings found.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+{% endblock %}

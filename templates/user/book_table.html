@@ -1,0 +1,34 @@
+{% extends "shared/user_base.html" %}
+{% block title %}Book a Table{% endblock %}
+{% block page_title %}Book a Table{% endblock %}
+{% block content %}
+    <form method="POST" action="{{ url_for('user.book_table') }}" class="form-box">
+        <div class="form-group">
+            <label for="table_id">Select Table</label>
+            <select name="table_id" id="table_id" required>
+                {% for table in tables %}
+                <option value="{{ table.table_id }}">Table {{ table.table_number }} (Seats {{ table.capacity }})</option>
+                {% else %}
+                <option disabled>No tables currently available</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="booking_date">Date</label>
+            <input type="date" name="booking_date" id="booking_date" required>
+        </div>
+
+        <div class="form-group">
+            <label for="booking_time">Time</label>
+            <input type="time" name="booking_time" id="booking_time" required>
+        </div>
+
+        <div class="form-group">
+            <label for="number_of_guests">Number of Guests</label>
+            <input type="number" name="number_of_guests" id="number_of_guests" min="1" value="2" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Confirm Booking</button>
+    </form>
+{% endblock %}

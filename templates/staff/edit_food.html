@@ -1,0 +1,25 @@
+{% extends "shared/staff_base.html" %}
+{% block title %}Edit Food{% endblock %}
+{% block page_title %}Edit Food Item{% endblock %}
+{% block content %}
+    <form method="POST" action="{{ url_for('staff.edit_food', food_id=food.food_id) }}" class="form-box">
+        <div class="form-group">
+            <label for="name">Food Name</label>
+            <input type="text" name="name" id="name" value="{{ food.name }}" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea name="description" id="description" rows="2">{{ food.description }}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="price">Price (₹)</label>
+            <input type="number" name="price" id="price" step="0.01" value="{{ food.price }}" required>
+        </div>
+        <div class="form-group">
+            <label for="category">Category</label>
+            <input type="text" name="category" id="category" value="{{ food.category }}">
+        </div>
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+        <a href="{{ url_for('staff.manage_food') }}" class="btn btn-secondary">Cancel</a>
+    </form>
+{% endblock %}

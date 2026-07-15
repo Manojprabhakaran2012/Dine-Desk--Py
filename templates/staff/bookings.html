@@ -1,0 +1,30 @@
+{% extends "shared/staff_base.html" %}
+{% block title %}Table Bookings{% endblock %}
+{% block page_title %}All Table Bookings{% endblock %}
+{% block content %}
+    <table class="data-table">
+        <thead>
+            <tr><th>Customer</th><th>Table</th><th>Date</th><th>Time</th><th>Guests</th><th>Status</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+            {% for b in bookings %}
+            <tr>
+                <td>{{ b.customer_name }}</td>
+                <td>{{ b.table_number }}</td>
+                <td>{{ b.booking_date }}</td>
+                <td>{{ b.booking_time }}</td>
+                <td>{{ b.number_of_guests }}</td>
+                <td><span class="badge badge-status-{{ b.status|lower }}">{{ b.status }}</span></td>
+                <td class="action-buttons">
+                    {% if b.status == 'Pending' %}
+                    <a href="{{ url_for('staff.confirm_booking', booking_id=b.booking_id) }}" class="btn btn-small btn-toggle">Confirm</a>
+                    <a href="{{ url_for('staff.cancel_booking', booking_id=b.booking_id) }}" class="btn btn-small btn-delete">Cancel</a>
+                    {% else %}
+                    —
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

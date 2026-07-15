@@ -1,0 +1,194 @@
+/* =====================================================================
+   style.css
+   Global styles: CSS variables, resets, typography, buttons, forms,
+   flash messages. Shared by every page in the project.
+   ===================================================================== */
+
+:root {
+    /* ---- Color palette: warm "bistro" theme (charcoal + mustard) ---- */
+    --color-bg:        #F7F5EF;   /* page background */
+    --color-surface:   #FFFFFF;   /* cards, forms */
+    --color-charcoal:  #2B2A28;   /* sidebar / dark text */
+    --color-charcoal-light: #3E3D3A;
+    --color-accent:    #C08A2E;   /* mustard gold - primary accent */
+    --color-accent-dark: #A6741F;
+    --color-olive:     #4B5E44;   /* secondary accent (green) */
+    --color-border:    #E5E1D8;
+    --color-text:      #2B2A28;
+    --color-text-muted:#6B6A66;
+
+    --color-success:   #3F7A4E;
+    --color-success-bg:#E8F3EA;
+    --color-error:     #B3412C;
+    --color-error-bg:  #FBE9E6;
+
+    --radius: 8px;
+    --shadow-sm: 0 1px 3px rgba(43, 42, 40, 0.08);
+    --shadow-md: 0 4px 14px rgba(43, 42, 40, 0.10);
+
+    --font-heading: 'Georgia', 'Times New Roman', serif;
+    --font-body: 'Segoe UI', Arial, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.5;
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+    color: var(--color-charcoal);
+    font-weight: 700;
+}
+
+a {
+    text-decoration: none;
+    color: var(--color-accent-dark);
+}
+
+ul {
+    list-style: none;
+}
+
+/* --------------------------- Buttons --------------------------- */
+.btn {
+    display: inline-block;
+    padding: 10px 18px;
+    border: none;
+    border-radius: var(--radius);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.08s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+    text-align: center;
+}
+
+.btn:hover {
+    opacity: 0.92;
+    transform: translateY(-1px);
+}
+
+.btn-primary {
+    background-color: var(--color-accent);
+    color: #fff;
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--color-charcoal);
+    border: 1px solid var(--color-border);
+}
+
+.btn-logout {
+    background-color: var(--color-charcoal);
+    color: #fff;
+    padding: 8px 16px;
+}
+
+.btn-full {
+    display: block;
+    width: 100%;
+}
+
+.btn-small {
+    padding: 6px 12px;
+    font-size: 12.5px;
+    margin-right: 6px;
+}
+
+.btn-edit    { background-color: var(--color-olive); color: #fff; }
+.btn-toggle  { background-color: var(--color-accent); color: #fff; }
+.btn-delete  { background-color: var(--color-error); color: #fff; }
+
+/* --------------------------- Forms --------------------------- */
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-charcoal);
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 14px;
+    font-family: var(--font-body);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background-color: #fff;
+    color: var(--color-text);
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px rgba(192, 138, 46, 0.15);
+}
+
+.form-box {
+    background: var(--color-surface);
+    padding: 24px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    max-width: 500px;
+    margin-bottom: 24px;
+}
+
+.inline-form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.inline-form select { width: auto; }
+
+/* --------------------------- Flash Messages --------------------------- */
+.flash-message {
+    padding: 12px 16px;
+    border-radius: var(--radius);
+    margin-bottom: 12px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.flash-success {
+    background-color: var(--color-success-bg);
+    color: var(--color-success);
+    border: 1px solid var(--color-success);
+}
+
+.flash-error {
+    background-color: var(--color-error-bg);
+    color: var(--color-error);
+    border: 1px solid var(--color-error);
+}
+
+/* --------------------------- 404 page --------------------------- */
+.error-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+    gap: 14px;
+}
+
+.error-page h1 {
+    font-size: 72px;
+    color: var(--color-accent);
+}

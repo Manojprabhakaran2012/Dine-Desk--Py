@@ -1,0 +1,23 @@
+{% extends "shared/user_base.html" %}
+{% block title %}My Bookings{% endblock %}
+{% block page_title %}My Table Bookings{% endblock %}
+{% block content %}
+    <table class="data-table">
+        <thead>
+            <tr><th>Table</th><th>Date</th><th>Time</th><th>Guests</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+            {% for booking in bookings %}
+            <tr>
+                <td>{{ booking.table_number }}</td>
+                <td>{{ booking.booking_date }}</td>
+                <td>{{ booking.booking_time }}</td>
+                <td>{{ booking.number_of_guests }}</td>
+                <td><span class="badge badge-status-{{ booking.status|lower }}">{{ booking.status }}</span></td>
+            </tr>
+            {% else %}
+            <tr><td colspan="5">You have no table bookings yet.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

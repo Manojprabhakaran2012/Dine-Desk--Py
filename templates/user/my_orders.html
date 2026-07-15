@@ -1,0 +1,22 @@
+{% extends "shared/user_base.html" %}
+{% block title %}My Orders{% endblock %}
+{% block page_title %}My Orders{% endblock %}
+{% block content %}
+    {% for order in orders %}
+    <div class="card order-card">
+        <div class="order-card-header">
+            <strong>Order #{{ order.order_id }}</strong>
+            <span class="badge badge-status-{{ order.status|lower }}">{{ order.status }}</span>
+        </div>
+        <p>Date: {{ order.order_date }}</p>
+        <ul class="order-items-list">
+            {% for item in order.items %}
+            <li>{{ item.name }} x {{ item.quantity }} — ₹{{ item.price }}</li>
+            {% endfor %}
+        </ul>
+        <p><strong>Total: ₹{{ order.total_amount }}</strong></p>
+    </div>
+    {% else %}
+    <p>You haven't placed any orders yet.</p>
+    {% endfor %}
+{% endblock %}

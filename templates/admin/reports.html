@@ -1,0 +1,36 @@
+{% extends "shared/admin_base.html" %}
+{% block title %}Reports{% endblock %}
+{% block page_title %}Simple Reports{% endblock %}
+{% block content %}
+    <h3>Top 5 Best-Selling Food Items</h3>
+    <table class="data-table">
+        <thead><tr><th>Food Item</th><th>Total Sold</th></tr></thead>
+        <tbody>
+            {% for f in top_food %}
+            <tr><td>{{ f.name }}</td><td>{{ f.total_sold }}</td></tr>
+            {% else %}
+            <tr><td colspan="2">No sales data yet.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h3>Orders by Status</h3>
+    <table class="data-table">
+        <thead><tr><th>Status</th><th>Count</th></tr></thead>
+        <tbody>
+            {% for o in orders_by_status %}
+            <tr><td>{{ o.status }}</td><td>{{ o.total }}</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h3>Bookings by Status</h3>
+    <table class="data-table">
+        <thead><tr><th>Status</th><th>Count</th></tr></thead>
+        <tbody>
+            {% for b in bookings_by_status %}
+            <tr><td>{{ b.status }}</td><td>{{ b.total }}</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
